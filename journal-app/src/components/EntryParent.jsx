@@ -1,6 +1,7 @@
 import { useState } from "react";
+import Entry from "./Entry";
 
-export default function EntryParent() {
+export default function EntryParent({entryData}) {
   const [editMode, setEditMode] = useState(false);
   return (
     <section>
