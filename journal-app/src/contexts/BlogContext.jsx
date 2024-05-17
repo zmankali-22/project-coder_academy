@@ -1,4 +1,4 @@
-import { useContext } from "react"
+import { useContext, useState } from "react"
 import { createContext } from "react"
 
 
@@ -26,4 +26,16 @@ export function useJournalData() {
 //  hook to function that edits the global data
 export function useJournalDispatch() {
     return useContext(JOurnalDispatchContext)
+}
+
+export function BlogProvider({children}) {
+    const [exampleState, setExampleState] = useState("Hello from the global label")
+
+    return (
+        <JournalDataContext.Provider value={exampleState}>
+            <JOurnalDispatchContext.Provider value={setExampleState}>
+                {children}
+            </JOurnalDispatchContext.Provider>
+        </JournalDataContext.Provider>
+    )
 }
