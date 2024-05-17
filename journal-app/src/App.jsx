@@ -6,20 +6,25 @@ import EntryForm from "./components/EntryForm";
 
 function App() {
   const [journalEntries, setJournalEntries] = useState([]);
-  const [storedEntries, setStoredEntries] =
-    useLocalStorage("journalEntries", []);
+  const [storedEntries, setStoredEntries] = useLocalStorage(
+    "journalEntries",
+    []
+  );
 
   const addEntryToJournal = (
     title,
     author,
     content,
     date = Date.now(),
-    id = null,
+    id = null
   ) => {
-
     if (id) {
-      let existingEntry = journalEntries.find(entry => entry.id === id);
-      let currentJournalEntries= journalEntries.filter(entry => entry.id !== id)
+      let existingEntry = journalEntries.find(
+        (entry) => entry.id === id
+      );
+      let currentJournalEntries = journalEntries.filter(
+        (entry) => entry.id !== id
+      );
       // update the found object
       existingEntry = {
         id: id,
@@ -27,17 +32,19 @@ function App() {
         author: author,
         content: content,
         date: date,
-      }
+      };
 
       // add the found object back in the array
 
-      let updatedJournalEntries = [...currentJournalEntries, existingEntry];
+      let updatedJournalEntries = [
+        ...currentJournalEntries,
+        existingEntry,
+      ];
 
       // write the state to state and localStorage
       setJournalEntries(updatedJournalEntries);
       setStoredEntries(updatedJournalEntries);
-    }else {
-
+    } else {
       // create a new entry
 
       setJournalEntries([
@@ -49,16 +56,14 @@ function App() {
         { id: journalEntries.length, title, author, content, date },
       ]);
     }
-    }
-
- 
+  };
 
   useEffect(() => {
     setJournalEntries(storedEntries);
 
-    // return () => {
-    //   setStoredEntries(journalEntries);
-    // };
+    return () => {
+      setStoredEntries(storedEntries);
+    };
   }, []);
   return (
     <>
