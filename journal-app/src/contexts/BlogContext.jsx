@@ -1,5 +1,7 @@
 import { useContext, useState } from "react"
+import { useEffect } from "react"
 import { createContext } from "react"
+import { useLocalStorage } from "react-use"
 
 
 const defaultJournalData = [
@@ -29,11 +31,24 @@ export function useJournalDispatch() {
 }
 
 export function BlogProvider({children}) {
-    const [exampleState, setExampleState] = useState("Hello from the global label")
+  
+    const [journalEntries, setJournalEntries] = useState([]);
+    const [storedEntries, setStoredEntries] = useLocalStorage(
+      "journalEntries",
+      []
+    );
+
+    useEffect(() => {
+        setJournalEntries(storedEntries);
+    
+        return () => {
+          setStoredEntries(storedEntries);
+        };
+      }, []);
 
     return (
-        <JournalDataContext.Provider value={exampleState}>
-            <JOurnalDispatchContext.Provider value={setExampleState}>
+        <JournalDataContext.Provider value={journalEntries}>
+            <JOurnalDispatchContext.Provider value={setJournalEntries}>
                 {children}
             </JOurnalDispatchContext.Provider>
         </JournalDataContext.Provider>
