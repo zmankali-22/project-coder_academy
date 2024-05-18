@@ -1,10 +1,14 @@
 import { useState } from "react"
+import { useJournalDispatch } from "../contexts/BlogContext"
 
-export default function EntryForm({title, author, content, id, addEntry}) {
+export default function EntryForm({title, author, content, id}) {
 
     const [localTitle, setLocalTitle] = useState(title || "Deafult Title")
     const [localAuthor, setLocalAuthor] = useState(author || "Deafult Author")
     const [localContent, setLocalContent] = useState(content || "Deafult Content")
+
+
+    let {addEntryToJournal }= useJournalDispatch()
 
 
   return (
@@ -18,7 +22,7 @@ export default function EntryForm({title, author, content, id, addEntry}) {
         <label htmlFor="entryContent">Content:</label>
         <input type="text" name = "entryContent" className="entryContent"  value={localContent} onChange={(event) => setLocalContent(event.target.value)}/>
 
-        <button onClick ={() => addEntry(localTitle, localAuthor, localContent, Date.now(), id) } >submit</button>
+        <button onClick ={() => addEntryToJournal(localTitle, localAuthor, localContent, Date.now(), id) } >submit</button>
     </div>
   )
 }
