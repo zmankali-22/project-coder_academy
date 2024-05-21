@@ -6,7 +6,6 @@ import { useJournalData } from "./contexts/BlogContext";
 
 function App() {
 
-  let {journalEntries} = useJournalData()
 
 
  
@@ -16,10 +15,7 @@ function App() {
   
       <EntryForm entryData={{}}  />
 
-      {journalEntries.map((entry) => (
-        <EntryParent
-          key={entry.id}
-          entryData={entry}
+
           
         />
       ))}

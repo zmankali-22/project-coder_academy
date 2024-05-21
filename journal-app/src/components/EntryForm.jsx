@@ -1,14 +1,20 @@
 import { useState } from "react"
 import { useJournalDispatch } from "../contexts/BlogContext"
+import { useNavigate } from "react-router-dom"
 
-export default function EntryForm({title, author, content, id}) {
+export default function EntryForm(entryData) {
 
-    const [localTitle, setLocalTitle] = useState(title || "Deafult Title")
-    const [localAuthor, setLocalAuthor] = useState(author || "Deafult Author")
-    const [localContent, setLocalContent] = useState(content || "Deafult Content")
+    const [localTitle, setLocalTitle] = useState(entryData.title || "Deafult Title")
+    const [localAuthor, setLocalAuthor] = useState(entryData.author || "Deafult Author")
+    const [localContent, setLocalContent] = useState(entryData.content || "Deafult Content")
 
 
     let {addEntryToJournal }= useJournalDispatch()
+    let navigate = useNavigate()
+
+    const submitEntry = () => {
+      addEntryToJournal(localTitle, localAuthor, localContent, Date.now(), entryData?.id) 
+    }
 
 
   return (
@@ -22,7 +28,7 @@ export default function EntryForm({title, author, content, id}) {
         <label htmlFor="entryContent">Content:</label>
         <input type="text" name = "entryContent" className="entryContent"  value={localContent} onChange={(event) => setLocalContent(event.target.value)}/>
 
-        <button onClick ={() => addEntryToJournal(localTitle, localAuthor, localContent, Date.now(), id) } >submit</button>
+        <button onClick ={submitEntry} >submit</button>
     </div>
   )
 }
