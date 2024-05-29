@@ -25,6 +25,10 @@ Currently, two official plugins are available:
 
 ## contexts
 
+- Base color
+
+    - hex color of new theme
+
 - LocalStorage manager for list of css themes
     - Array of theme list
 - LocalStorage manager for current css theme
