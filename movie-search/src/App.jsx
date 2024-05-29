@@ -1,16 +1,19 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { MovieProvider } from "./context/MovieContext";
-import Home from "./components/Home";
-import MovieDetails from "./components/MovieDetails";
+import Home from "./pages/Home";
+import MovieDetails from "./pages/MovieDetails";
+import Layout from "./Layout";
 
 function App() {
   return (
     <MovieProvider>
       <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/movies/:id" element={<MovieDetails />} />
-        </Routes>
+        <Layout>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/movies/:id" element={<MovieDetails />} />
+          </Routes>
+        </Layout>
       </BrowserRouter>
     </MovieProvider>
   );
