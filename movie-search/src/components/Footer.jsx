@@ -1,3 +1,7 @@
 export default function Footer() {
-  return <footer>{/* Add your footer content here */}</footer>;
+  return (
+    <footer className="footer">
+      {/* Add your footer content here */}
+    </footer>
+  );
 }

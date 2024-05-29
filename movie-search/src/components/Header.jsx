@@ -12,14 +12,15 @@ export default function Header() {
     navigate(`/search/${searchTerm}`);
   };
   return (
-    <header>
-      <nav>
+    <header className="header">
+        <h3>Movie Search</h3>
+      <nav className="nav-links">
         <ul>
           <li>
             <NavLink to="/">Home</NavLink>
           </li>
           <li>
-            <form onSubmit={handleSubmit}>
+            <form className="search-form" onSubmit={handleSubmit}>
               <input
                 type="text"
                 placeholder="Search Movies..."
