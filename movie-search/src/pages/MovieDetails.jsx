@@ -40,14 +40,14 @@ export default function MovieDetails() {
   if (!selectedMovie) return <div>Loading...</div>;
 
   return (
-    <div>
+    <div className="movie-details">
       <h1>{selectedMovie.title}</h1>
       <img
         src={`https://image.tmdb.org/t/p/w500/${selectedMovie.poster_path}`}
       />
       <p>{selectedMovie.overview}</p>
       {videoId ? (
-        <YouTube videoId={videoId} />
+        <YouTube videoId={videoId} className="youtube-video" />
       ) : (
         <p>No trailer available</p>
       )}
