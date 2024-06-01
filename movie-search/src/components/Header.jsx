@@ -9,11 +9,13 @@ export default function Header() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    navigate(`/search/${searchTerm}`);
+    if (searchTerm.trim()) {
+      navigate(`/search/${searchTerm}`);
+    }
   };
   return (
     <header className="header">
-        <h3>Movie Search</h3>
+      <h3>Movie Search</h3>
       <nav className="nav-links">
         <ul>
           <li>
