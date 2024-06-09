@@ -4,8 +4,15 @@ const express = require('express')
 
 const serverInstance = express()
 
+const pokemonRouter = require("./routers/pokemonRoutes.js")
+
 
 serverInstance.use(express.json())
+
+
+
+serverInstance.use("/pokemon", pokemonRouter )
+
 
 serverInstance.get("/", (request, response) => {
     console.log("Someone visited the hoimepage of the server")
@@ -22,6 +29,18 @@ serverInstance.post("/", (request, response) => {
         message: "Received data",
         requestData: request.body
     })
+})
+
+serverInstance.put("/", (request, response) => {
+    response.json ({ message: "Put request eceived"})
+})
+
+serverInstance.patch("/", (request, response) => {
+    response.json ({ message: "Patch request eceived"})
+})
+
+serverInstance.delete("/", (request, response) => {
+    response.json ({ message: "Delete request eceived"})
 })
 
 //  make the instance for other files to use
