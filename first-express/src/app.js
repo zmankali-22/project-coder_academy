@@ -1,18 +1,24 @@
 // Declare and configure the server
 
 const express = require('express')
-
 const serverInstance = express()
 
-const pokemonRouter = require("./routers/pokemonRoutes.js")
 
-
+//  raw json body allowed
 serverInstance.use(express.json())
+// Form data in body allowed
+serverInstance.use(express.urlencoded({extended: true}))
 
 
+const {readAuthData, verifyAuthData }= require("./middleware/authentication.js")
 
+serverInstance.use(readAuthData)
+serverInstance.use(verifyAuthData)
+
+
+//  Every route that begins with /pokemon gets passed to PokemonRouter
+const pokemonRouter = require("./routers/pokemonRoutes.js")
 serverInstance.use("/pokemon", pokemonRouter )
-
 
 serverInstance.get("/", (request, response) => {
     console.log("Someone visited the hoimepage of the server")
