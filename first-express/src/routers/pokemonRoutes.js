@@ -5,16 +5,20 @@ router.get("/", (request, response) => {
   response.json({ message: "Router route activated" });
 });
 
+router.get("/random", (request, response) => {
+  let queryParams = request.query;
+  response.json({
+    message: "Random route activated",
+    queryParams: queryParams,
+  });
+});
+
 router.get("/:pokemonNumber", (request, response) => {
   let retrivedNumberFromUrl = request.params.pokemonNumber;
 
   response.json({
     number: retrivedNumberFromUrl,
   });
-});
-
-router.get("/random", (request, response) => {
-  response.json({ message: "Random route activated" });
 });
 
 router.post("/", (request, response) => {
