@@ -22,4 +22,18 @@ router.get("/", (request, response, next) => {
     })
  })
 
+ router.get("/headerCheck", (request, response, next) => {
+
+    let authData = request.headers.authorization
+
+    if (!authData) {
+      return  next(new Error("No auth data provided"))
+    }
+
+    response.json({
+        message: "Auth data received",
+        data: authData
+    })
+ })
+
  module.exports = router
