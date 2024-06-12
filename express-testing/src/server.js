@@ -15,12 +15,13 @@ app.use("/v2", apiv2)
 
 
 app.use((error, request, response, next) => {
+    console.log(error.message)
     response.json({
         message: "Error occured",
-        error: error
+        error: error.message
     })
 })
 
-app.listen(port, () => {
-    console.log(`Server is running on port ${port}`)
-})
+
+
+module.exports = {app, port}
